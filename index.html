@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1000px, height=1000px, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
+		<script src="https://kit.fontawesome.com/44460dca6c.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+		<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+        <title></title>
+    </head>
+
+
+<body onload="inicializar();">
+    <h1>PRECIO <br> <h3>GANADO CARNE</h3> </h1> 
+
+    <h4><img class="colombia" src="https://sevmercadoganadero.com/images/colombia.jpg">  PROMEDIO A NIVEL NACIONAL ($/KILO)*</h4>
+
+	<div  class="wrap">
+		<div class="widget">
+			<div class="fecha">	
+				<h2>Semana
+					<p id="Semana" class="diaSemana"></p><p> - </p>
+					<p id="semanaPAsada" class="dia"></p>
+				</h2>
+			</div>	
+		</div>
+	</div>
+
+
+	<!--Fecha por inicio y fin de semana -->
+<script>
+	var meses = ['ENE','FEB','MAR','ABR','MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+
+	fechaActual = new Date();
+	var oneJan = new Date(fechaActual.getFullYear(),0,1);
+	var numeroDeDias = Math.floor((fechaActual - oneJan) / (24 * 60 * 60 * 1000));
+	var result = Math.ceil(( fechaActual.getDay() + 1 + numeroDeDias) / 7);
+	
+	var year = 2022;
+	var semana = result -1;
+
+	///primer dia del año
+	 var primerdia = new Date( year, 0, 1);
+
+	 //correciones necesarias
+	 var correcion = 6 - primerdia.getDay();
+
+	//fecha semana pasada  especificada
+	var primer = new Date( year ,0, (semana - 1 ) * 7 + 3 + correcion);
+	var ultimo = new Date ( year , 0, (semana - 1) * 7 + 9 + correcion);
+
+	this.semanaAnterior = primer.getDate() + meses[primer.getMonth()] + " A " + ultimo.getDate() + meses[ultimo.getMonth()];
+
+	//console.log(semanaAnterior);
+
+	document.getElementById('semanaPAsada').innerHTML = semanaAnterior;
+	document.getElementById('Semana').innerHTML = semana;
+
+</script>
+
+    <tbody>
+
+		<table>
+				<tr>
+					<th class="null"></th>
+					<th class="unica u2">Últimas 4 semanas</th>
+					<th class="unica u1">Última semana</th>
+				</tr>
+
+				<tr>
+					<td class="cen">HL</td>
+					<td class="formaterprecio"> $7000</td>
+					<td class="ulti formaterprecio">$7000</td>
+				</tr>
+				
+
+				<tr>
+					<td class="cen">HV</td>
+					<td class="formaterprecio">$7000</td>
+					<td class="ulti formaterprecio">$7000</td>
+				</tr>
+
+				<tr>
+					<td class="cen">ML</td>
+					<td class="formaterprecio"> $7000</td>
+					<td class="ulti formaterprecio">$7000</td>
+				</tr>
+				
+				<tr>
+					<td class="cen">MC</td>
+					<td class="formaterprecio"> $7000</td>
+					<td class="ulti formaterprecio">$7000</td>
+				</tr>
+
+				<tr style="height: 10px"></tr>
+				<tr >
+					<td class="cen" >Gordo H</td>
+					<td class="formaterprecio">$7000</td>
+					<td  class="ulti formaterprecio">$7000</td>
+				</tr>
+
+				<tr >
+					<td class="cen" >Gordo M</td>
+					<td class="formaterprecio">$7000</td>
+					<td  class="ulti formaterprecio">$7000</td>
+				</tr>
+
+		</table>
+	</tbody>
+
+	<!--Separador de mil-->
+	<script>
+		function agregarSeparadorMiles(numero){
+			var partesNumero = numero.toString().split('.');
+ 
+			partesNumero[0]= partesNumero[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+			return partesNumero.join('.');
+
+		}
+
+		//console.log(agregarSeparadorMiles(10000));
+
+
+		function inicializar(){
+
+			let lsttd = $(".formaterprecio")
+
+			for (var i = 0; i < lsttd.length; i++) {
+
+				let objTd = lsttd[i];
+
+				$(objTd).html(agregarSeparadorMiles($(objTd).html()));
+
+			}		
+
+		}
+
+	</script>
+
+	<p class="fin">Para conocer el detalle por departamento ingresa a:</p>
+
+	<p><a <i class="fas fa-globe"></i></a> sevmercadoganadero.com/precios</p>
+
+     <p class="datos"> *Datos promediados de los precios publicados por las subastas ganaderas.</p>
+
+
+    
+</body>
+</html>
